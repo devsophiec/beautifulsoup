@@ -6,3 +6,7 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 title = soup.title.string
 print("Titre de la page:", title)
+
+
+h1_titre = soup.find("h1", id="titre")
+print(h1_titre.get_text()) 
