@@ -23,7 +23,7 @@ for product in products:
     name = product.find("h2").string
     print(name)
 
-    price = product.find("p", class_="price").text.strip()
+    price = product.find("p", class_="price").text.strip().split()[-1].replace("€", "")  
     print(price)
 
     description = product.find_all("p")[1].text.strip()
