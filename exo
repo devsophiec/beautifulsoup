@@ -16,17 +16,18 @@ url = "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/7168871-a
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "html.parser")
-products= soup.find_all("li")
-print(products)
-product_name_tag = soup.find("h1", class_="product-name")
-product_name = product_name_tag.text if product_name_tag else "Nom inconnu"
+all_products = dict()
 
-product_price_tag = soup.find("span", class_="product-price")
-product_price = product_price_tag.text if product_price_tag else "Prix inconnu"
+products = soup.find_all("li", class_="product") 
+for product in products:
+    name = product.find("h2").string
+    print(name)
 
-product_description_tag = soup.find("p", class_="product-description")
-product_description = product_description_tag.text if product_description_tag else "Description indisponible"
+    price = product.find("p", class_="price").text.strip()
+    print(price)
 
-print(f"Nom du produit: {product_name}")
-print(f"Prix du produit: {product_price}")
-print(f"Description du produit: {product_description}")
+    description = product.find_all("p")[1].text.strip()
+    print(description)
+
+print(all_products)
+
