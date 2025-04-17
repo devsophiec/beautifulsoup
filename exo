@@ -1,0 +1,8 @@
+import requests
+from bs4 import BeautifulSoup
+url = "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/7168871-apprenez-les-bases-du-langage-python/refs/heads/main/P3/P3C2/correction/index.html"
+response = requests.get(url)
+
+soup = BeautifulSoup(response.text, "html.parser")
+title = soup.title.string
+print("Titre de la page:", title)
