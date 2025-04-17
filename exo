@@ -18,16 +18,25 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 all_products = dict()
 
+import requests
+from bs4 import BeautifulSoup
+url = "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/7168871-apprenez-les-bases-du-langage-python/refs/heads/main/P3/P3C2/correction/index.html"
+response = requests.get(url)
+
+soup = BeautifulSoup(response.text, "html.parser")
+all_products = dict()
+
 products = soup.find_all("li", class_="product") 
 for product in products:
     name = product.find("h2").string
     print(name)
 
     price = product.find("p", class_="price").text.strip().split()[-1].replace("€", "")  
-    print(price)
+    taux_conversion = 1.2
+    dollar_price = float(price)* taux_conversion
+    print(f"{dollar_price} USD")
 
     description = product.find_all("p")[1].text.strip()
     print(description)
 
 print(all_products)
-
