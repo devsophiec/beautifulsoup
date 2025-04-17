@@ -7,6 +7,26 @@ soup = BeautifulSoup(response.text, "html.parser")
 title = soup.title.string
 print("Titre de la page:", title)
 
-
 h1_titre = soup.find("h1", id="titre")
 print(h1_titre.get_text()) 
+
+import requests
+from bs4 import BeautifulSoup
+url = "https://raw.githubusercontent.com/OpenClassrooms-Student-Center/7168871-apprenez-les-bases-du-langage-python/refs/heads/main/P3/P3C2/correction/index.html"
+response = requests.get(url)
+
+soup = BeautifulSoup(response.text, "html.parser")
+products= soup.find_all("li")
+print(products)
+product_name_tag = soup.find("h1", class_="product-name")
+product_name = product_name_tag.text if product_name_tag else "Nom inconnu"
+
+product_price_tag = soup.find("span", class_="product-price")
+product_price = product_price_tag.text if product_price_tag else "Prix inconnu"
+
+product_description_tag = soup.find("p", class_="product-description")
+product_description = product_description_tag.text if product_description_tag else "Description indisponible"
+
+print(f"Nom du produit: {product_name}")
+print(f"Prix du produit: {product_price}")
+print(f"Description du produit: {product_description}")
